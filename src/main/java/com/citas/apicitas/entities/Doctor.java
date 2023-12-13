@@ -1,40 +1,66 @@
-package com.citas.apicitas.entities;
-
-import java.util.HashSet;
-import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import jakarta.persistence.*;
-import lombok.*;
-
+/**
+ * La clase {@code Doctor} representa a un profesional médico en el sistema.
+ * Contiene información como el identificador único, nombre, apellido, correo,
+ * especialidad y las citas asociadas a este doctor.
+ *
+ * @author Tu Nombre
+ * @version 1.0
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "doctor")
 public class Doctor {
 
-  @Id
-  @Column(name = "id_profesional")
-  private long idProfesional;
+    /**
+     * Identificador único del profesional médico.
+     */
+    @Id
+    @Column(name = "id_profesional")
+    private long idProfesional;
 
-  @Column
-  private String nombre;
+    /**
+     * Nombre del doctor.
+     */
+    @Column
+    private String nombre;
 
-  @Column
-  private String apellido;
+    /**
+     * Apellido del doctor.
+     */
+    @Column
+    private String apellido;
 
-  @Column
-  private String correo;
+    /**
+     * Correo electrónico del doctor.
+     */
+    @Column
+    private String correo;
 
-  @Enumerated(EnumType.STRING)
-  @Column
-  private Especialidad especialidad;
+    /**
+     * Especialidad del doctor, representada como un enum {@code Especialidad}.
+     */
+    @Enumerated(EnumType.STRING)
+    @Column
+    private Especialidad especialidad;
 
-  @JsonIgnore
-  @OneToMany(mappedBy = "doctor")
-  private Set<Cita> citas = new HashSet<>();
+    /**
+     * Conjunto de citas asociadas a este doctor.
+     * Utiliza la anotación {@code JsonIgnore} para evitar la serialización
+     * de las citas al convertir el objeto a formato JSON.
+     */
+    @JsonIgnore
+    @OneToMany(mappedBy = "doctor")
+    private Set<Cita> citas = new HashSet<>();
 
-  public enum Especialidad{medicina_interna, medicina_general};
+    /**
+     * Enumeración que representa las posibles especialidades de un doctor.
+     * Actualmente incluye las especialidades "medicina_interna" y "medicina_general".
+     */
+    public enum Especialidad {
+        medicina_interna,
+        medicina_general
+    }
 
+    // Constructor, getters y setters adicionales pueden ir aquí si es necesario.
 }
