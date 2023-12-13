@@ -1,14 +1,24 @@
-package com.citas.apicitas.repositories;
+/**
+ * Interface que define un repositorio para operaciones CRUD (Create, Read, Update, Delete) de entidades Cita.
+ * Extiende la interfaz CrudRepository de Spring Data.
+ *
+ * @param <Cita>   El tipo de entidad Cita que se gestionará en el repositorio.
+ * @param <CitaId> El tipo de identificador de la entidad Cita.
+ */
+public interface CitaRepository extends CrudRepository<Cita, CitaId> {
 
-import java.util.Optional;
-import java.util.Set;
+    /**
+     * Recupera todas las citas almacenadas en el repositorio.
+     *
+     * @return Un conjunto (Set) de todas las citas en el repositorio.
+     */
+    Set<Cita> findAll();
 
-import org.springframework.data.repository.CrudRepository;
-
-import com.citas.apicitas.entities.Cita;
-import com.citas.apicitas.entities.CitaId;
-
-public interface CitaRepository  extends CrudRepository<Cita, CitaId>{
-  Set<Cita> findAll();
-  Optional<Cita> findById(CitaId id);
+    /**
+     * Recupera una cita específica por su identificador único.
+     *
+     * @param id El identificador único de la cita que se desea recuperar.
+     * @return Un Optional que contiene la cita si se encuentra, o vacío si no se encuentra.
+     */
+    Optional<Cita> findById(CitaId id);
 }
