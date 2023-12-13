@@ -1,10 +1,16 @@
-package com.citas.apicitas.repositories;
+/**
+ * Interfaz que define las operaciones de acceso a datos para la entidad Paciente.
+ * Extiende CrudRepository, proporcionando operaciones CRUD básicas.
+ *
+ * @param <Paciente> Tipo de la entidad gestionada por el repositorio.
+ * @param <Long> Tipo del identificador único de la entidad.
+ */
+public interface PacienteRepository extends CrudRepository<Paciente, Long> {
 
-import org.springframework.data.repository.CrudRepository;
-import java.util.Set;
-
-import com.citas.apicitas.entities.Paciente;
-
-public interface PacienteRepository extends CrudRepository<Paciente , Long> {
-  Set<Paciente> findAll();
+    /**
+     * Recupera un conjunto de todos los pacientes.
+     *
+     * @return Conjunto de pacientes.
+     */
+    Set<Paciente> findAll();
 }
